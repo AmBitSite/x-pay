@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>X-Pay</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Exo:400,500,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+	<header class="header" id="header-sec">
+		<div class="header__wraper">
+			<nav class="navigation">
+				<div class="navigation__logo-block">
+					<img src="img/header/logo.png" alt="x-pay_logo" class="logo-img">
+				</div>
+				<ul class="navigation__link-block link-block">
+					<li class="link-block__item"><a href="index.html#header-sec">exchange page</a></li>
+					<li class="link-block__item"><a href="index.html#how">how it works</a></li>
+					<li class="link-block__item"><a href="index.html#advantages">benefits</a></li>
+					<li class="link-block__item"><a href="index.html#footer-sec">contact</a></li>
+				</ul>
+				<div class="navigation__language">ENG</div>
+			</nav>
+			<div class="header__content">
+				<div class="header__descrip">
+					<h3>exchange your money</h3>
+					<h3>in 2 easy steps</h3>
+					<div class="header__protection-block">
+						<span>We are fast and secure.</span>
+						<span>Our serveces are DDOS protected</span>
+					</div>
+				</div>
+				<div class="exchange-form">
+					<div class="exchange-form__first-form active">
+						<div class="exchange-form__crypto-block">
+							<span class="exchange-form__descrip">The cryptocerrency I own</span>
+							<ul class="exchange-wrap-own" id="currency-own">
+								<li class="exchange-wrap-own__item d-none">Bitcoin (btc)</li>
+								<li class="exchange-wrap-own__item d-none">Bitcoin (btc)</li>
+								<li class="exchange-wrap-own__item d-none">Ethereum (eth)</li>
+								<li class="exchange-wrap-own__item d-none">Ripple (xrp)</li>
+								<li class="exchange-wrap-own__item d-none">Bitcoin cash (btc)</li>
+								<li class="exchange-wrap-own__item d-none">Tether (usdt)</li>
+								<li class="exchange-wrap-own__item d-none">Oero (oeur)</li>
+								<li class="exchange-wrap-own__item d-none">Litecoin (ltc)</li>
+								<li class="exchange-wrap-own__item d-none">Dash</li>
+								<li class="exchange-wrap-own__item d-none">EOS</li>
+							</ul>
+						</div>
+						<div class="exchange-form__currency-block">
+							<span class="exchange-form__descrip">The currency i want</span>
+							<ul class="exchange-wrap-want" id="currency-want">
+								<li class="exchange-wrap-want__item d-none">Bank (€)</li>
+								<li class="exchange-wrap-want__item d-none">Bank (€)</li>
+								<li class="exchange-wrap-want__item d-none">Bank ($)</li>
+							</ul>
+						</div>
+						<div class="exchange-form__quantity-block">
+							<span class="exchange-form__descrip">I want to</span>
+							<div class="currency-quantity">
+								<input class="currency-quantity__input" type="text" id="change-currency-quantity" pattern="[0-9],\,,\. ">
+								<span class="currency-quantity__text" id="change-quantity-text">Bitcoin (btc)</span>
+							</div>
+						</div>
+						<div class="exchange-form__quantity-block">
+							<span class="exchange-form__descrip">I will get</span>
+							<div class="currency-quantity">
+								<input class="currency-quantity__input" type="text" id="change-will-get-quantity" pattern="[0-9],\,,\. ">
+								<span class="currency-quantity__text" id="change-will-get-text">Bank (€)</span>
+							</div>
+						</div>
+						<button class="exchange-form__button-next" id="exchange-next-step__btn">continue</button>
+					</div>
+					<div class="exchange-form__second-form" id="second-form">
+						<div class="exchange-form__email-block">
+							<span class="exchange-form__descrip">Your email</span>
+							<input class="exchange-props-bank__input" type="text" id="input_email">
+						</div>
+						<div class="exchange-form__wallet-adress-block">
+							<span class="exchange-form__descrip">Your BTC wallet adress</span>
+							<input class="exchange-props-bank__input" type="text" id="input_wallet">
+						</div>
+						<div class="exchange-form__bank-block">
+							<span class="exchange-form__descrip">Bank name</span>
+							<input class="exchange-props-bank__input" type="text" id="input_bank">
+						</div>
+						<div class="exchange-form__swift-block">
+							<span class="exchange-form__descrip">Swift</span>
+							<input class="exchange-props-bank__input" type="text" id="input_swift">
+						</div>
+						<div class="exchange-form__account-block">
+							<span class="exchange-form__descrip">IBAN / Account number</span>
+							<input class="exchange-props-bank__input" type="text" id="input_account">
+						</div>
+						<button class="exchange-form__button-next" id="exchange-button">exchange</button>
+					</div>
+					<div class="exchange-form-pointer">
+						<div class="exchange-form-pointer__item exchange-form-pointer__item_active"></div>
+						<div class="exchange-form-pointer__item"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<main class="content">
+		<section class="content__section content__section_sec1" id="how">
+			<div class="content__wraper">
+				<div class="content-section-block-img">
+					<img src="img/work-x-pay-bg.png" alt="" class="content-section__img-bg">
+				</div>
+				<div class="content__separator"></div>
+				<div class="content__descrip">
+					<h3>how does it</h3>
+					<h3>work</h3>
+				</div>
+				<ul class="content__steps-block">
+					<li class="content__steps-block-item">
+						<div class="content__steps-block-img-contanier">
+							<img src="img/sec1-steps-icon-1.png" alt="enter details" class="content__steps-block-img">
+						</div>
+						<p>
+							Select currency pair from the list and enter recipient details
+						</p>
+					</li>
+					<li class="content__steps-block-item">
+						<div class="content__steps-block-img-contanier">
+							<img src="img/sec1-steps-icon-2.png" alt="transfer funds" class="content__steps-block-img">
+						</div>
+						<p>
+							Transfer funds from your wallet to Xpay free of charge
+						</p>
+					</li>
+					<li class="content__steps-block-item">
+						<div class="content__steps-block-img-contanier">
+							<img src="img/sec1-steps-icon-3.png" alt="Xpay will apply" class="content__steps-block-img">
+						</div>
+						<p>
+							Xpay will apply the best exchange rate available to your trade
+						</p>
+					</li>
+					<li class="content__steps-block-item">
+						<div class="content__steps-block-img-contanier">
+							<img src="img/sec1-steps-icon-4.png" alt="Funds transfered"
+								class="content__steps-block-img">
+						</div>
+						<p>
+							Funds are instantly transfered to the recipient's wallet at a fare fee of 0.3%
+						</p>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<section class="content__section content__section_sec2" id="advantages">
+			<div class="content__wraper">
+				<div class="content__separator">
+				</div>
+				<div class="content__wraper_center">
+					<span class="content-section__header z-index_2">
+						OUR
+					</span>
+					<span class="content-section__header text-color_header content-section__header_pb-70 content-seection__header_shadow" data-descr = "ADVANTAGES">
+						ADVANTAGES
+					</span>
+					<div class="content-section-block">
+						<div class="content-section-block-item">
+							<img src="img/sec2-steps-icon-1.png" alt="">
+							<span class="content-section-block__header text-color_header">Security</span>
+							<span class="content-section-block__text">A reliable platform, which thanks to Anti DDOS
+								protection SSl certificate and other protective measures provides maximum
+								security.</span>
+						</div>
+						<div class="content-section-block-item">
+							<img src="img/sec2-steps-icon-2.png" alt="">
+							<span class="content-section-block__header text-color_header">Easy exchange</span>
+							<span class="content-section-block__text">Exchange in quick and easy steps that make the
+								buying of your cryptocurrency a piece of pie.</span>
+						</div>
+						<div class="content-section-block-item">
+							<img src="img/sec2-steps-icon-3.png" alt="">
+							<span class="content-section-block__header text-color_header">Customer support</span>
+							<span class="content-section-block__text">Is anything unclear? Our customer support will
+								answer all questions and solve all problems that you may encounter</span>
+						</div>
+					</div>
+				</div>
+				<div class="content-section-exchange">
+					<span class="content-section-exchange__text">
+						I WANT TO
+					</span>
+					<a href="#" class="content-section-exchange__link">EXCHANGE</a>
+					<span class="content-section-exchange__text">
+						MY MONEY
+					</span>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer class="footer" id="footer-sec">
+		<div class="footer__wraper">
+			<ul class="footer__list">
+				<li class="footer__list-item">
+					<img src="img/header/logo.png" alt="x-pay_logo" class="logo-img">
+				</li>
+				<li>
+					<ul class="footer__link-block link-block">
+						<li class="link-block__item"><a href="index.html#header-sec">exchange page</a></li>
+						<li class="link-block__item"><a href="index.html#how">how it works</a></li>
+						<li class="link-block__item"><a href="index.html#advantages">benefits</a></li>
+						<li class="link-block__item"><a href="index.html#footer-sec">contact</a></li>
+					</ul>
+				</li>
+				<li class="footer__list-item">
+					<span>address:</span>
+					<span>71-75 shelton street, covent garden, london, england, WC2H 9JQ</span>
+				</li>
+				<li class="footer__list-item">
+					<span>company number:</span>
+					<span>12302611</span>
+				</li>
+				<li class="footer__list-item">
+					<span>phone number:</span>
+					<span>12302611</span>
+				</li>
+			</ul>
+			<span class="footer__descrip">&copy; k trade international ltd</span>
+		</div>
+	</footer>
+
+	<script src="js/scripts.js"></script>
+</body>

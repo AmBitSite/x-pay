@@ -1,4 +1,1 @@
-# x_pay
-
-View:
-https://ftcs-vladimirleontev.github.io/x_pay/
+# https://ambitsite.github.io/x-pay/.

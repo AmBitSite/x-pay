@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<header class="header" id="header-sec">
+	<header class="header">
 		<div class="header__wraper">
 			<nav class="navigation">
 				<div class="navigation__logo-block">
@@ -65,7 +65,7 @@
 						<div class="exchange-form__quantity-block">
 							<span class="exchange-form__descrip">I want to</span>
 							<div class="currency-quantity">
-								<input class="currency-quantity__input" type="text" id="change-currency-quantity">
+								<input class="currency-quantity__input" type="number" id="change-currency-quantity">
 								<span class="currency-form__text" id="change-quantity-text">Bitcoin (BTC)</span>
 							</div>
 						</div>
@@ -97,7 +97,7 @@
 						</div>
 						<div class="exchange-form__account-block">
 							<span class="exchange-form__descrip">IBAN / Account number</span>
-							<input class="exchange-props-bank__input" type="text" id="input_account">
+							<input class="exchange-props-bank__input" type="text" id="input-account">
 						</div>
 						<button class="exchange-form__button-next" id="exchange-button">exchange</button>
 					</div>
@@ -105,8 +105,8 @@
 						<div class="exchange-form__email-block">
 							<span class="exchange-form__descrip">Transfer</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled">
-								<span class="exchange-form__descrip">100.000.000.000.000</span>
-								<span class="exchange-form__descrip exchange-form__descrip_gold">BTC</span>
+								<span class="exchange-form__descrip" id="exchange-crypto-value">100.000.000.000.000</span>
+								<span class="exchange-form__descrip exchange-form__descrip_gold" id="crypto-type">BTC</span>
 								<button class="exchange-form__btn-copy">copy</button>
 							</div>
 						</div>
@@ -120,14 +120,14 @@
 						<div class="exchange-form__bank-block">
 							<span class="exchange-form__descrip">You will get</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled">
-								<span class="exchange-form__descrip">100.000.000.000.000</span>
-								<span class="exchange-form__descrip exchange-form__descrip_gold">EUR</span>
+								<span class="exchange-form__descrip" id="exchange-money-value">100.000.000.000.000</span>
+								<span class="exchange-form__descrip exchange-form__descrip_gold" id="money-type">EUR</span>
 							</div>
 						</div>
 						<div class="exchange-form__swift-block">
 							<span class="exchange-form__descrip">To account</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled" type="text">
-								<span class="exchange-form__descrip">1234567890123456</span>
+								<span class="exchange-form__descrip" id="account-number">1234567890123456</span>
 							</div>
 						</div>
 						<div class="exchange-form-block-text">
@@ -265,7 +265,7 @@
 					<span>12302611</span>
 				</li>
 			</ul>
-			<span class="footer__descrip">&copy; k trade international ltd</span>
+			<p class="footer__descrip">&copy; k trade international ltd</p>
 		</div>
 	</footer>
 

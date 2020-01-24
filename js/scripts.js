@@ -30,22 +30,28 @@ currencyWant.addEventListener("click", () => {
     openWrap(currencyWant)
     changeText(currencyWant, changeWillGetText)
 });
+let exchangeCryptoValue = document.getElementById("exchange-crypto-value");
+let exchangeMoneyValue = document.getElementById("exchange-money-value");
+let exchangeTypeCrypto = document.getElementById("crypto-type");
+let moneyType = document.getElementById("money-type");
 
 inputCurrencyQuantity.addEventListener("keyup", (e) => {
     if (checkPhoneKey(e.key)) {
-        // let reg = /\./;
-        // let string = reg.exec(inputCurrencyQuantity.value)
-        // if (string) {
-        //     console.log(string)
-        // }
         let own = `${document.getElementById("currency-own-value").getAttribute("data-value")}`;
         let want = `${document.getElementById("currency-want-value").getAttribute("data-value")}`;
         let amount = `${document.getElementById("change-currency-quantity").value}`;
         let url = `https://srv.bitfiat.online/server/pair/${own}/${want}/${amount}`;
         fetch(url)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(response => {
-                document.getElementById("change-will-get-quantity").value = response
+                if (!JSON.parse(response).code) {
+                    document.getElementById("change-will-get-quantity").value = JSON.parse(response)
+                    exchangeCryptoValue.innerText = amount;
+                    exchangeTypeCrypto.innerText = own
+                    moneyType.innerText = want
+                    exchangeMoneyValue.innerText = JSON.parse(response)
+                }
+
             })
     }
     else {
@@ -54,7 +60,7 @@ inputCurrencyQuantity.addEventListener("keyup", (e) => {
 })
 
 function checkPhoneKey(key) {
-    return ((key >= '0' && key <= '9') || key == '.');
+    return ((key >= '0' && key <= '9' || key == '.'));
 }
 
 function nextFormSlide() {
@@ -68,5 +74,17 @@ function nextFormSlide() {
     }
 }
 // pointerExchange.addEventListener("click", ()=>{nextFormSlide()})
-exchangeBtn.addEventListener("click", () => { nextFormSlide() });
+exchangeBtn.addEventListener("click", () => {
+    nextFormSlide();
+    let accountNumber = document.getElementById("account-number");
+    let inputAccount = document.getElementById("input-account");
+    accountNumber.innerText = inputAccount.value;
+});
 btnExchangeNextStep.addEventListener("click", () => { nextFormSlide() });
+
+exchangeButtonCancel.addEventListener('click', ()=>{
+    let activeElem = document.querySelector(".active");
+    activeElem.classList.toggle("active");
+    activeElem.parentElement.children[0].classList.toggle("active");
+    document.querySelector(".exchange-form-pointer").classList.remove("d-none")
+})

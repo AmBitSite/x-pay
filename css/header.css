@@ -340,7 +340,9 @@ select, input {
 	font-size: 16px;
 	line-height: 20px;
 }
-
+.currency-quantity__input::-webkit-inner-spin-button{
+	display: none;
+}
 .currency-quantity__text {
 	display: inline-block;
 	margin-left: 10px;

@@ -38,11 +38,16 @@
 					</div>
 				</div>
 				<div class="exchange-form">
-					<div class="exchange-form__first-form active">
+					<div class="exchange-form__first-form active ">
+						<div id="preloader" >
+							<div id="loader" class=" d-none"></div>
+						</div>
+						
 						<div class="exchange-form__crypto-block">
 							<span class="exchange-form__descrip">The cryptocerrency I own</span>
 							<ul class="exchange-wrap-own" id="currency-own">
-								<li class="exchange-wrap-own__item d-none" data-value="BTC" id="currency-own-value">Bitcoin (BTC)</li>
+								<li class="exchange-wrap-own__item d-none" data-value="BTC" id="currency-own-value">
+									Bitcoin (BTC)</li>
 								<li class="exchange-wrap-own__item d-none" data-value="BTC">Bitcoin (BTC)</li>
 								<li class="exchange-wrap-own__item d-none" data-value="ETH">Ethereum (ETH)</li>
 								<li class="exchange-wrap-own__item d-none" data-value="XRP">Ripple (XRP)</li>
@@ -57,7 +62,8 @@
 						<div class="exchange-form__currency-block">
 							<span class="exchange-form__descrip">The currency i want</span>
 							<ul class="exchange-wrap-want" id="currency-want">
-								<li class="exchange-wrap-want__item d-none" data-value="EUR" id="currency-want-value">Bank (€)</li>
+								<li class="exchange-wrap-want__item d-none" data-value="EUR" id="currency-want-value">
+									Bank (€)</li>
 								<li class="exchange-wrap-want__item d-none" data-value="EUR">Bank (€)</li>
 								<li class="exchange-wrap-want__item d-none" data-value="USD">Bank ($)</li>
 							</ul>
@@ -65,14 +71,15 @@
 						<div class="exchange-form__quantity-block">
 							<span class="exchange-form__descrip">I want to</span>
 							<div class="currency-quantity">
-								<input class="currency-quantity__input" type="number" id="change-currency-quantity">
+								<input class="currency-quantity__input" type="text" id="change-currency-quantity">
 								<span class="currency-form__text" id="change-quantity-text">Bitcoin (BTC)</span>
 							</div>
 						</div>
 						<div class="exchange-form__quantity-block">
 							<span class="exchange-form__descrip">I will get</span>
 							<div class="currency-quantity">
-								<input class="currency-quantity__input" type="text" id="change-will-get-quantity" disabled>
+								<input class="currency-quantity__input" type="text" id="change-will-get-quantity"
+									disabled>
 								<span class="currency-form__text" id="change-will-get-text">Bank (€)</span>
 							</div>
 						</div>
@@ -105,23 +112,28 @@
 						<div class="exchange-form__email-block">
 							<span class="exchange-form__descrip">Transfer</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled">
-								<span class="exchange-form__descrip" id="exchange-crypto-value">100.000.000.000.000</span>
-								<span class="exchange-form__descrip exchange-form__descrip_gold" id="crypto-type">BTC</span>
+								<span class="exchange-form__descrip"
+									id="exchange-crypto-value">100.000.000.000.000</span>
+								<span class="exchange-form__descrip exchange-form__descrip_gold"
+									id="crypto-type">BTC</span>
 								<button class="exchange-form__btn-copy">copy</button>
 							</div>
 						</div>
 						<div class="exchange-form__wallet-adress-block">
 							<span class="exchange-form__descrip">To address</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled">
-								<input class="exchange-form__descrip exchange-form__descrip_input" value="hghghvgjg352kghk4k5gk3sadasdasdasasdasdsa" disabled>
+								<input class="exchange-form__descrip exchange-form__descrip_input"
+									value="hghghvgjg352kghk4k5gk3sadasdasdasasdasdsa" disabled>
 								<button class="exchange-form__btn-copy">copy</button>
 							</div>
 						</div>
 						<div class="exchange-form__bank-block">
 							<span class="exchange-form__descrip">You will get</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled">
-								<span class="exchange-form__descrip" id="exchange-money-value">100.000.000.000.000</span>
-								<span class="exchange-form__descrip exchange-form__descrip_gold" id="money-type">EUR</span>
+								<span class="exchange-form__descrip"
+									id="exchange-money-value">100.000.000.000.000</span>
+								<span class="exchange-form__descrip exchange-form__descrip_gold"
+									id="money-type">EUR</span>
 							</div>
 						</div>
 						<div class="exchange-form__swift-block">
@@ -131,11 +143,13 @@
 							</div>
 						</div>
 						<div class="exchange-form-block-text">
-							<span class="exchange-form-block-text__item">Pay the application before the end of rhis time</span>
+							<span class="exchange-form-block-text__item">Pay the application before the end of rhis
+								time</span>
 							<span class="exchange-form-block-text__item_active">23:16</span>
 						</div>
 						<button class="exchange-form__button-next" id="exchange-button">i paid</button>
-						<button class="exchange-form__button-next exchange-form__button-next_cancel" id="exchange-button_cancel">DELETE APPLICATION</button>
+						<button class="exchange-form__button-next exchange-form__button-next_cancel"
+							id="exchange-button_cancel">DELETE APPLICATION</button>
 					</div>
 					<div class="exchange-form-pointer">
 						<div class="exchange-form-pointer__item exchange-form-pointer__item_active"></div>
@@ -201,7 +215,9 @@
 					<span class="content-section__header z-index_2">
 						OUR
 					</span>
-					<span class="content-section__header text-color_header content-section__header_pb-70 content-seection__header_shadow" data-descr = "ADVANTAGES">
+					<span
+						class="content-section__header text-color_header content-section__header_pb-70 content-seection__header_shadow"
+						data-descr="ADVANTAGES">
 						ADVANTAGES
 					</span>
 					<div class="content-section-block">

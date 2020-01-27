@@ -34,25 +34,70 @@ let exchangeCryptoValue = document.getElementById("exchange-crypto-value");
 let exchangeMoneyValue = document.getElementById("exchange-money-value");
 let exchangeTypeCrypto = document.getElementById("crypto-type");
 let moneyType = document.getElementById("money-type");
+let arr = [];
+let count = 0;
+
+function sendRequest() {
+    let own = `${document.getElementById("currency-own-value").getAttribute("data-value")}`;
+    let want = `${document.getElementById("currency-want-value").getAttribute("data-value")}`;
+    let amount = document.getElementById("change-currency-quantity").value || 0;
+    let url = `https://srv.bitfiat.online/server/pair/${own}/${want}/${amount}`;
+    document.getElementById("loader").classList.toggle("d-none")
+    document.getElementById("preloader").classList.toggle("elem-disabled")
+    document.getElementById("change-currency-quantity").setAttribute("disabled", "true")
+    fetch(url)
+        .then(response => response.json())
+        .catch(response => alert("error") )
+        .then(response => {
+            if (!JSON.parse(response).code) {
+                document.getElementById("loader").classList.toggle("d-none")
+                document.getElementById("preloader").classList.toggle("elem-disabled")
+                document.getElementById("change-currency-quantity").removeAttribute("disabled")
+                document.getElementById("change-currency-quantity").focus()
+                document.getElementById("change-will-get-quantity").value = JSON.parse(response)
+                exchangeCryptoValue.innerText = amount;
+                exchangeTypeCrypto.innerText = own
+                moneyType.innerText = want
+                exchangeMoneyValue.value = JSON.parse(response)
+            }
+
+        })
+}
 
 inputCurrencyQuantity.addEventListener("keyup", (e) => {
     if (checkPhoneKey(e.key)) {
-        let own = `${document.getElementById("currency-own-value").getAttribute("data-value")}`;
-        let want = `${document.getElementById("currency-want-value").getAttribute("data-value")}`;
-        let amount = `${document.getElementById("change-currency-quantity").value}`;
-        let url = `https://srv.bitfiat.online/server/pair/${own}/${want}/${amount}`;
-        fetch(url)
-            .then(response => response.json())
-            .then(response => {
-                if (!JSON.parse(response).code) {
-                    document.getElementById("change-will-get-quantity").value = JSON.parse(response)
-                    exchangeCryptoValue.innerText = amount;
-                    exchangeTypeCrypto.innerText = own
-                    moneyType.innerText = want
-                    exchangeMoneyValue.innerText = JSON.parse(response)
-                }
-
-            })
+        if(e.key != 'Backspace'){
+            arr.push(e.key);
+        }
+        if (e.key == "." && count == 1) {
+            arr.pop()
+            inputCurrencyQuantity.value = arr.join("")
+        }
+        if (e.key == ".") {
+            count = 1
+            arr.push("0");
+            inputCurrencyQuantity.value = arr.join("")
+            sendRequest()
+            arr.pop()
+            inputCurrencyQuantity.value = arr.join("")
+        };
+        if (e.key == "Backspace") {
+            let test = arr.pop()
+            if(test === "."){
+                arr.pop()
+            }
+            if(test === undefined){
+                count = 0;
+            }
+            inputCurrencyQuantity.value = arr.join("")
+            sendRequest()
+        }
+        exchangeMoneyValue.value = arr.join("")
+        sendRequest() 
+    }
+    else if(e.code === "KeyV"){
+        arr = inputCurrencyQuantity.value.split('')
+        sendRequest() 
     }
     else {
         inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(`${e.key}`, '')
@@ -60,7 +105,7 @@ inputCurrencyQuantity.addEventListener("keyup", (e) => {
 })
 
 function checkPhoneKey(key) {
-    return ((key >= '0' && key <= '9' || key == '.'));
+    return ((key >= '0' && key <= '9' || key == '.' || key == 'Backspace'));
 }
 
 function nextFormSlide() {
@@ -82,7 +127,7 @@ exchangeBtn.addEventListener("click", () => {
 });
 btnExchangeNextStep.addEventListener("click", () => { nextFormSlide() });
 
-exchangeButtonCancel.addEventListener('click', ()=>{
+exchangeButtonCancel.addEventListener('click', () => {
     let activeElem = document.querySelector(".active");
     activeElem.classList.toggle("active");
     activeElem.parentElement.children[0].classList.toggle("active");

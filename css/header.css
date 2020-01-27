@@ -168,6 +168,7 @@ a {
 	justify-content: flex-start;
 	align-items: flex-start;
 	font-family: Exo;
+	position: relative;
 }
 
 .exchange-form__crypto-block, .exchange-form__currency-block, .exchange-form__quantity-block, .exchange-form__button-next, .exchange-form__descrip-block, .exchange-form__indicator, .exchange-form__email-block, .exchange-form__wallet-adress-block, .exchange-form__bank-block, .exchange-form__swift-block, .exchange-form__account-block {

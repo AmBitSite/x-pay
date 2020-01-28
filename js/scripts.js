@@ -42,31 +42,33 @@ function sendRequest() {
     let want = `${document.getElementById("currency-want-value").getAttribute("data-value")}`;
     let amount = document.getElementById("change-currency-quantity").value || 0;
     let url = `https://srv.bitfiat.online/server/pair/${own}/${want}/${amount}`;
-    document.getElementById("loader").classList.toggle("d-none")
-    document.getElementById("preloader").classList.toggle("elem-disabled")
-    document.getElementById("change-currency-quantity").setAttribute("disabled", "true")
+    // document.getElementById("loader").classList.toggle("d-none")
+    // document.getElementById("preloader").classList.toggle("elem-disabled")
+    // document.getElementById("change-currency-quantity").setAttribute("disabled", "true")
     fetch(url)
         .then(response => response.json())
-        .catch(response => alert("error") )
+        .catch(response => console.log("error"))
         .then(response => {
             if (!JSON.parse(response).code) {
-                document.getElementById("loader").classList.toggle("d-none")
-                document.getElementById("preloader").classList.toggle("elem-disabled")
-                document.getElementById("change-currency-quantity").removeAttribute("disabled")
+                // document.getElementById("loader").classList.toggle("d-none")
+                // document.getElementById("preloader").classList.toggle("elem-disabled")
+                // document.getElementById("change-currency-quantity").removeAttribute("disabled")
                 document.getElementById("change-currency-quantity").focus()
                 document.getElementById("change-will-get-quantity").value = JSON.parse(response)
                 exchangeCryptoValue.innerText = amount;
                 exchangeTypeCrypto.innerText = own
                 moneyType.innerText = want
-                exchangeMoneyValue.value = JSON.parse(response)
+                exchangeMoneyValue.innerText = JSON.parse(response)
             }
 
         })
 }
+let timer 
 
 inputCurrencyQuantity.addEventListener("keyup", (e) => {
+    timer = setInterval(sendRequest, 1000)
     if (checkPhoneKey(e.key)) {
-        if(e.key != 'Backspace'){
+        if (e.key != 'Backspace') {
             arr.push(e.key);
         }
         if (e.key == "." && count == 1) {
@@ -77,27 +79,28 @@ inputCurrencyQuantity.addEventListener("keyup", (e) => {
             count = 1
             arr.push("0");
             inputCurrencyQuantity.value = arr.join("")
-            sendRequest()
+            timer
             arr.pop()
             inputCurrencyQuantity.value = arr.join("")
         };
         if (e.key == "Backspace") {
             let test = arr.pop()
-            if(test === "."){
+            if (test === ".") {
                 arr.pop()
             }
-            if(test === undefined){
+            if (test === undefined) {
                 count = 0;
             }
             inputCurrencyQuantity.value = arr.join("")
-            sendRequest()
+            timer
         }
-        exchangeMoneyValue.value = arr.join("")
-        sendRequest() 
+        inputCurrencyQuantity.value = arr.join("")
+        timer
     }
-    else if(e.code === "KeyV"){
+    else if (e.code === "KeyV") {
         arr = inputCurrencyQuantity.value.split('')
-        sendRequest() 
+        timer
+
     }
     else {
         inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(`${e.key}`, '')
@@ -118,18 +121,49 @@ function nextFormSlide() {
         pointerExchange.parentNode.classList.toggle("d-none")
     }
 }
-// pointerExchange.addEventListener("click", ()=>{nextFormSlide()})
 exchangeBtn.addEventListener("click", () => {
-    nextFormSlide();
-    let accountNumber = document.getElementById("account-number");
-    let inputAccount = document.getElementById("input-account");
-    accountNumber.innerText = inputAccount.value;
+    if(fillingRecipient()){
+        nextFormSlide();
+        let accountNumber = document.getElementById("account-number");
+        let inputAccount = document.getElementById("input-account");
+        accountNumber.innerText = inputAccount.value;
+        clearInterval(timer)
+    }
 });
-btnExchangeNextStep.addEventListener("click", () => { nextFormSlide() });
+btnExchangeNextStep.addEventListener("click", () => {
+    if (document.getElementById("change-currency-quantity").value !== "") {
+        nextFormSlide()
+    }
+});
 
 exchangeButtonCancel.addEventListener('click', () => {
     let activeElem = document.querySelector(".active");
     activeElem.classList.toggle("active");
     activeElem.parentElement.children[0].classList.toggle("active");
-    document.querySelector(".exchange-form-pointer").classList.remove("d-none")
+    document.querySelector(".exchange-form-pointer").classList.remove("d-none");
+    timer = setInterval(sendRequest, 1000)
 })
+let obj = {}
+function fillingRecipient(){
+    let email = document.getElementById("input_email")
+    let walletAddress = document.getElementById("input_wallet")
+    let bankName = document.getElementById("input_bank")
+    let swift = document.getElementById("input_swift")
+    let iban = document.getElementById("input-account")
+    obj.email = email.value
+    obj.walletAddress = walletAddress.value
+    obj.bankName = bankName.value
+    obj.swift = swift.value
+    obj.iban = iban.value
+    let flag = 0
+    for(key in obj){
+        if(obj[key] !== ""){
+            flag+=1
+        }
+        else {flag = 0}
+    }
+    if(flag === 5){
+        return true
+    }
+    else return false
+}

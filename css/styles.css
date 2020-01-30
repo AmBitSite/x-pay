@@ -423,7 +423,20 @@ body {
 		transform: rotate(360deg);
 	}
 }
-
+.text-block{
+	font-family: Exo;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	padding-bottom:15px;
+	text-align: center;
+}
+.text-block__color{
+	color:#fbfbfb;
+}
+.text-block_dinamic{
+	color: #F4D17F;
+}
 .d-none{
 	display: none;
 }

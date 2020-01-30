@@ -7,7 +7,8 @@ let inputCurrencyWillGet = document.getElementById("change-will-get-quantity");
 let btnExchangeNextStep = document.getElementById("exchange-next-step__btn");
 let pointerExchange = document.querySelector(".exchange-form-pointer__item");
 let exchangeBtn = document.getElementById("exchange-button");
-let exchangeButtonCancel = document.getElementById("exchange-button_cancel")
+let exchangeButtonCancel = document.getElementById("exchange-button_cancel");
+let willGetText = document.querySelector(".text-block_dinamic")
 
 function openWrap(element) {
     for (let i = 1; i < element.children.length; i++) {
@@ -45,9 +46,10 @@ function sendRequest() {
     // document.getElementById("loader").classList.toggle("d-none")
     // document.getElementById("preloader").classList.toggle("elem-disabled")
     // document.getElementById("change-currency-quantity").setAttribute("disabled", "true")
-    fetch(url)
+    if(own !== "OEUR" && want !== "USD"){
+        fetch(url)
         .then(response => response.json())
-        .catch(response => console.log("error"))
+        
         .then(response => {
             if (!JSON.parse(response).code) {
                 // document.getElementById("loader").classList.toggle("d-none")
@@ -59,14 +61,30 @@ function sendRequest() {
                 exchangeTypeCrypto.innerText = own
                 moneyType.innerText = want
                 exchangeMoneyValue.innerText = JSON.parse(response)
+                willGetText.innerText = `${JSON.parse(response)} ${want}`
+
             }
-
         })
+        // .catch(response => {
+        //     if(JSON.parse(response).code ===500){
+        //         // console.log(JSON.parse(response.json()))
+        //         clearInterval(timer)
+                
+        //     }
+        // })
+    }
+    else if (own === "OEUR" && want === "EUR"){
+        document.getElementById("change-will-get-quantity").value = amount
+    }
 }
-let timer 
 
+
+let timer = setInterval(sendRequest, 1000)
 inputCurrencyQuantity.addEventListener("keyup", (e) => {
-    timer = setInterval(sendRequest, 1000)
+    
+    // debugger
+    // clearInterval(timer)
+    // timer 
     if (checkPhoneKey(e.key)) {
         if (e.key != 'Backspace') {
             arr.push(e.key);
@@ -90,17 +108,19 @@ inputCurrencyQuantity.addEventListener("keyup", (e) => {
             }
             if (test === undefined) {
                 count = 0;
+                
             }
             inputCurrencyQuantity.value = arr.join("")
+            
             timer
         }
         inputCurrencyQuantity.value = arr.join("")
         timer
+        
     }
     else if (e.code === "KeyV") {
         arr = inputCurrencyQuantity.value.split('')
         timer
-
     }
     else {
         inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(`${e.key}`, '')
@@ -152,9 +172,12 @@ function fillingRecipient(){
     let iban = document.getElementById("input-account")
     obj.email = email.value
     obj.walletAddress = walletAddress.value
-    obj.bankName = bankName.value
+    obj.bank_name = bankName.value
     obj.swift = swift.value
     obj.iban = iban.value
+    obj.own = document.getElementById("currency-own-value").getAttribute("data-value")
+    obj.want = document.getElementById("currency-want-value").getAttribute("data-value")
+    obj.amount = document.getElementById("change-currency-quantity").value || 0
     let flag = 0
     for(key in obj){
         if(obj[key] !== ""){
@@ -162,7 +185,7 @@ function fillingRecipient(){
         }
         else {flag = 0}
     }
-    if(flag === 5){
+    if(flag === 8){
         return true
     }
     else return false

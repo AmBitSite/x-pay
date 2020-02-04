@@ -1,4 +1,4 @@
-let currencyOwn = document.getElementById("currency-own");
+const CURRENCY_OWN = document.getElementById("currency-own");
 let currencyWant = document.getElementById("currency-want");
 let changeQuantityText = document.getElementById("change-quantity-text");
 let inputCurrencyQuantity = document.getElementById("change-currency-quantity")
@@ -23,9 +23,9 @@ function changeText(parentElemInput, elemOutput) {
     elemOutput.innerText = parentElemInput.children[0].innerText
 }
 
-currencyOwn.addEventListener("click", () => {
-    openWrap(currencyOwn);
-    changeText(currencyOwn, changeQuantityText)
+CURRENCY_OWN.addEventListener("click", () => {
+    openWrap(CURRENCY_OWN);
+    changeText(CURRENCY_OWN, changeQuantityText)
 });
 currencyWant.addEventListener("click", () => {
     openWrap(currencyWant)
@@ -43,18 +43,12 @@ function sendRequest() {
     let want = `${document.getElementById("currency-want-value").getAttribute("data-value")}`;
     let amount = document.getElementById("change-currency-quantity").value || 0;
     let url = `https://srv.bitfiat.online/server/pair/${own}/${want}/${amount}`;
-    // document.getElementById("loader").classList.toggle("d-none")
-    // document.getElementById("preloader").classList.toggle("elem-disabled")
-    // document.getElementById("change-currency-quantity").setAttribute("disabled", "true")
     if (own !== "OEUR" && want !== "USD") {
         fetch(url)
             .then(response => response.json())
 
             .then(response => {
                 if (!JSON.parse(response).code) {
-                    // document.getElementById("loader").classList.toggle("d-none")
-                    // document.getElementById("preloader").classList.toggle("elem-disabled")
-                    // document.getElementById("change-currency-quantity").removeAttribute("disabled")
                     document.getElementById("change-currency-quantity").focus()
                     document.getElementById("change-will-get-quantity").value = JSON.parse(response)
                     exchangeCryptoValue.innerText = amount;
@@ -62,33 +56,26 @@ function sendRequest() {
                     moneyType.innerText = want
                     exchangeMoneyValue.innerText = JSON.parse(response)
                     willGetText.innerText = `${JSON.parse(response)} ${want}`
-
                 }
             })
-        // .catch(response => {
-        //     if(JSON.parse(response).code ===500){
-        //         // console.log(JSON.parse(response.json()))
-        //         clearInterval(timer)
-
-        //     }
-        // })
     }
     else if (own === "OEUR" && want === "EUR") {
         document.getElementById("change-will-get-quantity").value = amount
     }
 }
+let timeout_id = window.setInterval(sendRequest, 1000)
 
 inputCurrencyQuantity.addEventListener("keyup", (e) => {
-    setTimeout(sendRequest,0)
-
-    if (e.key == "e") {
-        inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(`${e.key}`, '')
-    }
-    if (e.key == "+") {
-        inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(`${e.key}`, '')
-    }
-    if (e.key == "-") {
-        inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(`${e.key}`, '')
+    switch(e.key){
+        case "e":
+            inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(e.key, '')
+            break
+        case "+":
+            inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(e.key, '')
+            break
+        case "-":
+            inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(e.key, '')
+            break
     }
 })
 
@@ -113,7 +100,7 @@ exchangeBtn.addEventListener("click", () => {
         let accountNumber = document.getElementById("account-number");
         let inputAccount = document.getElementById("input-account");
         accountNumber.innerText = inputAccount.value;
-        clearInterval(timer)
+        clearTimeout(timeout_id)
     }
 });
 btnExchangeNextStep.addEventListener("click", () => {
@@ -127,15 +114,21 @@ exchangeButtonCancel.addEventListener('click', () => {
     activeElem.classList.toggle("active");
     activeElem.parentElement.children[0].classList.toggle("active");
     document.querySelector(".exchange-form-pointer").classList.remove("d-none");
-    timer = setInterval(sendRequest, 1000)
+    clearTimeout(timeout_id)
+    timeout_id = window.setInterval(sendRequest, 1000)
 })
+
+
+
+
 let obj = {}
 function fillingRecipient() {
-    let email = document.getElementById("input_email")
-    let walletAddress = document.getElementById("input_wallet")
-    let bankName = document.getElementById("input_bank")
-    let swift = document.getElementById("input_swift")
-    let iban = document.getElementById("input-account")
+    let email = document.getElementById("input_email"),
+        walletAddress = document.getElementById("input_wallet"),
+        bankName = document.getElementById("input_bank"),
+        swift = document.getElementById("input_swift"),
+        iban = document.getElementById("input-account");
+        
     obj.email = email.value
     obj.walletAddress = walletAddress.value
     obj.bank_name = bankName.value
@@ -146,10 +139,8 @@ function fillingRecipient() {
     obj.amount = `${document.getElementById("change-currency-quantity").value}` || 0
     let flag = 0
     for (key in obj) {
-        if (obj[key] !== "") {
-            flag ++
-        }
-        else { flag = 0 }
+        obj[key] = obj[key].trim();
+        obj[key] !== ""?flag ++:flag = 0 
     }
     if (flag === 8) {
         return true

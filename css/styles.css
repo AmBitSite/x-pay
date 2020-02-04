@@ -453,3 +453,7 @@ body {
 .d-block {
 	display: block;
 }
+.text__error{
+	color: #b22222;
+	border: 2px solid #b22222;
+}

@@ -383,12 +383,12 @@ select, input {
 .exchange-crypto-value{
 	background-color: transparent;
 	border: none;
-	position: absolute;
+	/* position: absolute;
 	top: -120%;
 	left: 0;
 	opacity: 0;
 	width: 20px;
-	height: 20px;
+	height: 20px; */
 }
 .exchange-crypto-value:focus{
 	outline: none;

@@ -52,7 +52,7 @@ function sendRequest() {
                     document.getElementById("change-currency-quantity").focus()
                     document.getElementById("change-will-get-quantity").value = JSON.parse(response)
                     exchangeCryptoValue.value = `${amount} ${own}`;
-                    exchangeTypeCrypto.innerText = exchangeCryptoValue.value
+                    // exchangeTypeCrypto.innerText = exchangeCryptoValue.value
                     moneyType.innerText = want
                     exchangeMoneyValue.innerText = JSON.parse(response)
                     willGetText.innerText = `${JSON.parse(response)} ${want}`
@@ -148,48 +148,23 @@ function fillingRecipient() {
     else return false
 }
 
-
-
-
-const copyEmailBtn = document.querySelector('.js-emailcopybtn');
-let BTN_COPY_TRANSFER = document.getElementById('btn-copy-transfer');
+const BTN_COPY_TRANSFER = document.getElementById('btn-copy-transfer');
 const BTN_COPY_ADDRESS = document.getElementById('btn-copy-address');
+let cryptoValue = document.getElementById("exchange-crypto-value");
+let walletAdress = document.getElementById("wallet-adress");
 
 
-
-function copyText() {
-    walletAdress
-    var copyText = document.getElementById("exchange-crypto-value");
-    copyText.select();
-    document.execCommand("copy");
-    window.getSelection().removeAllRanges()
-}
 BTN_COPY_TRANSFER.addEventListener('click', () => {
-    var copyText = document.getElementById("exchange-crypto-value");
-    copyText.select();
+    cryptoValue.removeAttribute("disabled")
+    cryptoValue.select();
     document.execCommand("copy");
     window.getSelection().removeAllRanges()
+    cryptoValue.setAttribute("disabled", "true")
 });
-
 BTN_COPY_ADDRESS.addEventListener('click', ()=>{
-    let walletAdress = document.getElementById("wallet-adress");
     walletAdress.removeAttribute("disabled")
     walletAdress.select();
     document.execCommand("copy");
     window.getSelection().removeAllRanges()
     walletAdress.setAttribute("disabled", "true")
 })
-// let emailLink = document.querySelector('.js-emaillink');
-// let range = document.createRange();  
-// range.selectNode(emailLink);  
-// window.getSelection().addRange(range);  
-
-// try {  
-//   // Теперь, когда мы выбрали текст ссылки, выполним команду копирования
-//   let successful = document.execCommand('copy');  
-//   let msg = successful ? 'successful' : 'unsuccessful';  
-//   console.log('Copy email command was ' + msg);  
-// } catch(err) {  
-//   console.log('Oops, unable to copy');  
-// }
-// window.getSelection().removeAllRanges(); 

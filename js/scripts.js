@@ -43,7 +43,7 @@ function sendRequest() {
     let want = `${document.getElementById("currency-want-value").getAttribute("data-value")}`;
     let amount = document.getElementById("change-currency-quantity").value || 0;
     let url = `https://srv.bitfiat.online/server/pair/${own}/${want}/${amount}`;
-    if (own !== "OEUR" && want !== "USD") {
+    if (own !== "OEUR") {
         fetch(url)
             .then(response => response.json())
 
@@ -51,22 +51,22 @@ function sendRequest() {
                 if (!JSON.parse(response).code) {
                     document.getElementById("change-currency-quantity").focus()
                     document.getElementById("change-will-get-quantity").value = JSON.parse(response)
-                    exchangeCryptoValue.innerText = amount;
-                    exchangeTypeCrypto.innerText = own
+                    exchangeCryptoValue.value = `${amount} ${own}`;
+                    exchangeTypeCrypto.innerText = exchangeCryptoValue.value
                     moneyType.innerText = want
                     exchangeMoneyValue.innerText = JSON.parse(response)
                     willGetText.innerText = `${JSON.parse(response)} ${want}`
                 }
             })
     }
-    else if (own === "OEUR" && want === "EUR") {
-        document.getElementById("change-will-get-quantity").value = amount
-    }
+    // else if (own === "OEUR" && want === "EUR") {
+    //     document.getElementById("change-will-get-quantity").value = amount
+    // }
 }
 let timeout_id = window.setInterval(sendRequest, 1000)
 
 inputCurrencyQuantity.addEventListener("keyup", (e) => {
-    switch(e.key){
+    switch (e.key) {
         case "e":
             inputCurrencyQuantity.value = inputCurrencyQuantity.value.replace(e.key, '')
             break
@@ -128,7 +128,7 @@ function fillingRecipient() {
         bankName = document.getElementById("input_bank"),
         swift = document.getElementById("input_swift"),
         iban = document.getElementById("input-account");
-        
+
     obj.email = email.value
     obj.walletAddress = walletAddress.value
     obj.bank_name = bankName.value
@@ -140,10 +140,56 @@ function fillingRecipient() {
     let flag = 0
     for (key in obj) {
         obj[key] = obj[key].trim();
-        obj[key] !== ""?flag ++:flag = 0 
+        obj[key] !== "" ? flag++ : flag = 0
     }
     if (flag === 8) {
         return true
     }
     else return false
 }
+
+
+
+
+const copyEmailBtn = document.querySelector('.js-emailcopybtn');
+let BTN_COPY_TRANSFER = document.getElementById('btn-copy-transfer');
+const BTN_COPY_ADDRESS = document.getElementById('btn-copy-address');
+
+
+
+function copyText() {
+    walletAdress
+    var copyText = document.getElementById("exchange-crypto-value");
+    copyText.select();
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges()
+}
+BTN_COPY_TRANSFER.addEventListener('click', () => {
+    var copyText = document.getElementById("exchange-crypto-value");
+    copyText.select();
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges()
+});
+
+BTN_COPY_ADDRESS.addEventListener('click', ()=>{
+    let walletAdress = document.getElementById("wallet-adress");
+    walletAdress.removeAttribute("disabled")
+    walletAdress.select();
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges()
+    walletAdress.setAttribute("disabled", "true")
+})
+// let emailLink = document.querySelector('.js-emaillink');
+// let range = document.createRange();  
+// range.selectNode(emailLink);  
+// window.getSelection().addRange(range);  
+
+// try {  
+//   // Теперь, когда мы выбрали текст ссылки, выполним команду копирования
+//   let successful = document.execCommand('copy');  
+//   let msg = successful ? 'successful' : 'unsuccessful';  
+//   console.log('Copy email command was ' + msg);  
+// } catch(err) {  
+//   console.log('Oops, unable to copy');  
+// }
+// window.getSelection().removeAllRanges(); 

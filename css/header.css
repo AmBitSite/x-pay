@@ -363,7 +363,7 @@ select, input {
 	font-size: 16px;
 	line-height: 20px;
 	color: #76C599;
-	user-select: none;
+	/* user-select: none; */
 	border-radius: 22px;
 	border: 1px solid #76C599;
 	margin-top: 4px;
@@ -380,6 +380,20 @@ select, input {
 	display: flex;
 	position: relative;
 }
+.exchange-crypto-value{
+	background-color: transparent;
+	border: none;
+	position: absolute;
+	top: -120%;
+	left: 0;
+	opacity: 0;
+	width: 20px;
+	height: 20px;
+}
+.exchange-crypto-value:focus{
+	outline: none;
+}
+
 .exchange-form__descrip_input{
 	border: none;
 	background:transparent;

@@ -380,15 +380,14 @@ select, input {
 	display: flex;
 	position: relative;
 }
+
 .exchange-crypto-value{
 	background-color: transparent;
 	border: none;
-	/* position: absolute;
-	top: -120%;
-	left: 0;
-	opacity: 0;
-	width: 20px;
-	height: 20px; */
+	color: #F4D17F;
+}
+.exchange-crypto-value:first-letter{
+	color: #fff;
 }
 .exchange-crypto-value:focus{
 	outline: none;

@@ -437,9 +437,6 @@ body {
 .text-block_dinamic{
 	color: #F4D17F;
 }
-.d-none{
-	display: none;
-}
 
 .elem-disabled{
 	position: absolute;
@@ -456,4 +453,41 @@ body {
 .text__error{
 	color: #b22222;
 	border: 2px solid #b22222;
+}
+.error{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background-color: #c4c4c42d;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 10;
+}
+.error-block{
+	position: relative;
+	width: 200px;
+	background-color: rgb(0, 0, 0);
+	padding: 30px 50px;
+	box-sizing: content-box;
+}
+.error__text{
+	color: #fff;
+	font-size: 20px;
+	
+}
+.error__btn{
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.error__btn:active{
+	transform: translateY(2px);
+}
+
+.d-none{
+	display: none;
 }

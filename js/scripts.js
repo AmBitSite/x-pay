@@ -10,6 +10,10 @@ let exchangeBtn = document.getElementById("exchange-button");
 let exchangeButtonCancel = document.getElementById("exchange-button_cancel");
 let willGetText = document.querySelector(".text-block_dinamic")
 
+function returnId(id) {
+    return document.getElementById(id)
+}
+
 function openWrap(element) {
     for (let i = 1; i < element.children.length; i++) {
         element.children[i].classList.toggle('d-none');
@@ -31,37 +35,27 @@ currencyWant.addEventListener("click", () => {
     openWrap(currencyWant)
     changeText(currencyWant, changeWillGetText)
 });
-let exchangeCryptoValue = document.getElementById("exchange-crypto-value");
-let exchangeMoneyValue = document.getElementById("exchange-money-value");
-let exchangeTypeCrypto = document.getElementById("crypto-type");
-let moneyType = document.getElementById("money-type");
-let arr = [];
-let count = 0;
 
 function sendRequest() {
-    let own = `${document.getElementById("currency-own-value").getAttribute("data-value")}`;
-    let want = `${document.getElementById("currency-want-value").getAttribute("data-value")}`;
-    let amount = document.getElementById("change-currency-quantity").value || 0;
+    let own = `${returnId("currency-own-value").getAttribute("data-value")}`;
+    let want = `${returnId("currency-want-value").getAttribute("data-value")}`;
+    let amount = returnId("change-currency-quantity").value || 0;
     let url = `https://srv.bitfiat.online/server/pair/${own}/${want}/${amount}`;
     if (own !== "OEUR") {
         fetch(url)
             .then(response => response.json())
-
             .then(response => {
+                timeout_id
                 if (!JSON.parse(response).code) {
-                    document.getElementById("change-currency-quantity").focus()
-                    document.getElementById("change-will-get-quantity").value = JSON.parse(response)
-                    exchangeCryptoValue.value = `${amount} ${own}`;
-                    // exchangeTypeCrypto.innerText = exchangeCryptoValue.value
-                    moneyType.innerText = want
-                    exchangeMoneyValue.innerText = JSON.parse(response)
+                    returnId("change-currency-quantity").focus()
+                    returnId("change-will-get-quantity").value = JSON.parse(response)
                     willGetText.innerText = `${JSON.parse(response)} ${want}`
+                }
+                else {
+                    clearTimeout(timeout_id)
                 }
             })
     }
-    // else if (own === "OEUR" && want === "EUR") {
-    //     document.getElementById("change-will-get-quantity").value = amount
-    // }
 }
 let timeout_id = window.setInterval(sendRequest, 1000)
 
@@ -96,15 +90,79 @@ function nextFormSlide() {
 }
 exchangeBtn.addEventListener("click", () => {
     if (fillingRecipient()) {
-        nextFormSlide();
-        let accountNumber = document.getElementById("account-number");
-        let inputAccount = document.getElementById("input-account");
-        accountNumber.innerText = inputAccount.value;
-        clearTimeout(timeout_id)
+
+
+
+        let url = "https://srv.bitfiat.online/server/creates/conversions/steps/ones";
+        let obj = {}
+        obj.own = returnId("currency-own-value").getAttribute("data-value")
+        obj.want = returnId("currency-want-value").getAttribute("data-value")
+        obj.amount = returnId("change-currency-quantity").value || 0
+        obj.email = returnId("input_email").value
+        obj.crypto_wallet = returnId("input_wallet").value
+        obj.bank_name = returnId("input_bank").value
+        obj.swift = returnId("input_swift").value
+        obj.iban = returnId("input-account").value
+        let stringifyObj = JSON.stringify(obj)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: stringifyObj
+        })
+            .then(response => response.json())
+
+            .then(response => {
+                // if (response.status === "200") {
+                clearTimeout(timeout_id)
+                nextFormSlide();
+                fillingResponseFiend(response.result)
+                window.location.reload()
+                // }
+                // else {
+
+                // }
+            }
+                // reject => {
+                //     let activeElem = document.querySelector(".active");
+                //     activeElem.classList.toggle("active");
+                //     activeElem.parentElement.children[0].classList.toggle("active");
+                //     document.querySelector(".exchange-form-pointer").classList.remove("d-none");
+                //     clearTimeout(timeout_id)
+                // }
+            )
+            .catch(
+                error => {
+                    let activeElem = document.querySelector(".active");
+                    activeElem.classList.toggle("active");
+                    activeElem.parentElement.children[0].classList.toggle("active");
+                    document.querySelector(".exchange-form-pointer").classList.remove("d-none");
+                    clearTimeout(timeout_id)
+                    errorBlock.classList.remove("d-none")
+                }
+            )
+
     }
 });
+let errorBlock = document.querySelector(".error")
+let errorBtn = document.querySelector(".error__btn")
+errorBtn.addEventListener("click", () => {
+    errorBlock.classList.add("d-none")
+    window.location.reload()
+})
+function fillingResponseFiend(obj) {
+
+    returnId("exchange-crypto-value").value = `${obj.own} ${obj.crypto_amount}`
+    returnId("wallet-adress").value = obj.our_crypto_wallet
+    let accountField = returnId("account-number");
+    returnId("exchange-money-value").innerText = obj.amount
+    returnId("money-type").innerText = obj.want
+    accountField.innerText = obj.iban     //поле to account, поле iban будет приходить от сервера
+    sessionStorage.setItem("token", JSON.stringify(obj))
+}
 btnExchangeNextStep.addEventListener("click", () => {
-    if (document.getElementById("change-currency-quantity").value !== "") {
+    if (returnId("change-currency-quantity").value !== "") {
         nextFormSlide()
     }
 });
@@ -114,29 +172,21 @@ exchangeButtonCancel.addEventListener('click', () => {
     activeElem.classList.toggle("active");
     activeElem.parentElement.children[0].classList.toggle("active");
     document.querySelector(".exchange-form-pointer").classList.remove("d-none");
-    clearTimeout(timeout_id)
-    timeout_id = window.setInterval(sendRequest, 1000)
+    sessionStorage.removeItem("token")
+    window.location.reload()
 })
 
-
-
-
-let obj = {}
 function fillingRecipient() {
-    let email = document.getElementById("input_email"),
-        walletAddress = document.getElementById("input_wallet"),
-        bankName = document.getElementById("input_bank"),
-        swift = document.getElementById("input_swift"),
-        iban = document.getElementById("input-account");
+    let obj = {};
 
-    obj.email = email.value
-    obj.walletAddress = walletAddress.value
-    obj.bank_name = bankName.value
-    obj.swift = swift.value
-    obj.iban = iban.value
-    obj.own = document.getElementById("currency-own-value").getAttribute("data-value")
-    obj.want = document.getElementById("currency-want-value").getAttribute("data-value")
-    obj.amount = `${document.getElementById("change-currency-quantity").value}` || 0
+    obj.email = returnId("input_email").value
+    obj.walletAddress = returnId("input_wallet").value
+    obj.bank_name = returnId("input_bank").value
+    obj.swift = returnId("input_swift").value
+    obj.iban = returnId("input-account").value
+    obj.own = returnId("currency-own-value").getAttribute("data-value")
+    obj.want = returnId("currency-want-value").getAttribute("data-value")
+    obj.amount = `${returnId("change-currency-quantity").value}` || 0
     let flag = 0
     for (key in obj) {
         obj[key] = obj[key].trim();
@@ -148,23 +198,71 @@ function fillingRecipient() {
     else return false
 }
 
-const BTN_COPY_TRANSFER = document.getElementById('btn-copy-transfer');
-const BTN_COPY_ADDRESS = document.getElementById('btn-copy-address');
-let cryptoValue = document.getElementById("exchange-crypto-value");
-let walletAdress = document.getElementById("wallet-adress");
+const BTN_COPY_TRANSFER = returnId('btn-copy-transfer');
+const BTN_COPY_ADDRESS = returnId('btn-copy-address');
 
-
-BTN_COPY_TRANSFER.addEventListener('click', () => {
-    cryptoValue.removeAttribute("disabled")
-    cryptoValue.select();
+function clipToBuffer(id) {
+    let elem = document.getElementById(id)
+    elem.removeAttribute("disabled")
+    elem.select();
     document.execCommand("copy");
     window.getSelection().removeAllRanges()
-    cryptoValue.setAttribute("disabled", "true")
-});
-BTN_COPY_ADDRESS.addEventListener('click', ()=>{
-    walletAdress.removeAttribute("disabled")
-    walletAdress.select();
-    document.execCommand("copy");
-    window.getSelection().removeAllRanges()
-    walletAdress.setAttribute("disabled", "true")
-})
+    elem.setAttribute("disabled", "true")
+}
+BTN_COPY_ADDRESS.addEventListener('click', () => { clipToBuffer("wallet-adress") })
+BTN_COPY_TRANSFER.addEventListener('click', () => { clipToBuffer("exchange-crypto-value") });
+
+
+if (sessionStorage.getItem("token")) {
+    nextFormSlide();
+    nextFormSlide();
+    let obj = JSON.parse(sessionStorage.getItem("token"))
+    returnId("exchange-crypto-value").value = `${obj.own} ${obj.crypto_amount}`
+    returnId("wallet-adress").value = obj.our_crypto_wallet
+    returnId("exchange-money-value").innerText = obj.amount
+    returnId("money-type").innerText = obj.want
+    returnId("account-number").innerText = obj.iban
+    willGetText.innerText = `${obj.amount} ${obj.want}`
+    clearTimeout(timeout_id)
+    let timer = obj.time
+    let seconds = "00";
+    let minutes = "00"
+    let timer_id = setInterval(() => {
+        timer--;
+        seconds = Math.floor(timer % 60);
+        minutes = Math.floor((timer / 60) % 60);
+        returnId("timer").innerText = `${minutes}:${seconds}`
+        if(timer <=0){
+            sessionStorage.removeItem("token")
+            window.location.reload()
+        }
+    }, 1000);
+    // debugger
+    returnId("timer").innerText = `${minutes}:${seconds}`
+    let transactionToken = {
+        transaction_token:obj.transaction_token
+    }
+    let url = "https://srv.bitfiat.online/server/gets/transactions/infos"
+    fetch(url,{
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(transactionToken)
+    })
+    .then(response => response.json())
+    .then(response =>{
+        sessionStorage.setItem("token", JSON.stringify(response.result))
+    })
+    .catch(
+        error => {
+            let activeElem = document.querySelector(".active");
+            activeElem.classList.toggle("active");
+            activeElem.parentElement.children[0].classList.toggle("active");
+            document.querySelector(".exchange-form-pointer").classList.remove("d-none");
+            clearTimeout(timeout_id)
+            clearInterval(timer_id)
+            errorBlock.classList.remove("d-none")
+        }
+    )
+}

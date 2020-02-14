@@ -14,6 +14,14 @@
 </head>
 
 <body>
+	<div class="error d-none">
+		<div class="error-block">
+			<span class="error__text">
+				Sorry, we are not working with the selected cryptocurrency yet.
+			</span>
+			<button class="error__btn"><img src="img/favicon.ico" alt=""></button>
+		</div>
+	</div>
 	<header class="header">
 		<div class="header__wraper">
 			<nav class="navigation">
@@ -39,9 +47,9 @@
 				</div>
 				<div class="exchange-form">
 					<div class="exchange-form__first-form active ">
-						<!-- <div id="preloader" >
-							<div id="loader" class=" d-none"></div>
-						</div> -->
+						<div id="preloader" >
+							<div id="loader" class="d-none"></div>
+						</div>
 						<div class="exchange-form__crypto-block">
 							<span class="exchange-form__descrip">The cryptocerrency I own</span>
 							<ul class="exchange-wrap-own" id="currency-own">
@@ -84,10 +92,10 @@
 						</div>
 						<button class="exchange-form__button-next" id="exchange-next-step__btn">continue</button>
 					</div>
-					<div class="exchange-form__second-form " id="second-form">
+					<div class="exchange-form__second-form" id="second-form">
 						<div class="exchange-form__email-block">
 							<span class="exchange-form__descrip">Your email</span>
-							<input class="exchange-props-bank__input" type="text" id="input_email">
+							<input class="exchange-props-bank__input" type="text" id="input_email" value="example@mail.com" disabled>
 						</div>
 						<div class="exchange-form__wallet-adress-block">
 							<span class="exchange-form__descrip">Your BTC wallet adress</span>
@@ -103,7 +111,7 @@
 						</div>
 						<div class="exchange-form__account-block">
 							<span class="exchange-form__descrip">IBAN / Account number</span>
-							<input class="exchange-props-bank__input" type="text" id="input-account">
+							<input class="exchange-props-bank__input" type="text" id="input-account" value="GE58BG0000000177851400" disabled>
 						</div>
 						<button class="exchange-form__button-next" id="exchange-button">exchange</button>
 					</div>
@@ -112,7 +120,7 @@
 							<span class="exchange-form__descrip">Transfer</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled" id="test">
 								<input class="exchange-form__descrip exchange-crypto-value"
-									id="exchange-crypto-value" value="10000000" type="text" disabled>
+									id="exchange-crypto-value" type="text" disabled>
 								<!-- <span class="exchange-form__descrip exchange-form__descrip_gold"
 									id="crypto-type"></span> -->
 								<button class="exchange-form__btn-copy" id="btn-copy-transfer">copy</button>
@@ -130,21 +138,21 @@
 							<span class="exchange-form__descrip">You will get</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled">
 								<span class="exchange-form__descrip"
-									id="exchange-money-value">100.000.000.000.000</span>
+									id="exchange-money-value"></span>
 								<span class="exchange-form__descrip exchange-form__descrip_gold"
-									id="money-type">EUR</span>
+									id="money-type"></span>
 							</div>
 						</div>
 						<div class="exchange-form__swift-block">
 							<span class="exchange-form__descrip">To account</span>
 							<div class="exchange-props-bank__input exchange-props-bank__input_disabled" type="text">
-								<span class="exchange-form__descrip" id="account-number">1234567890123456</span>
+								<span class="exchange-form__descrip" id="account-number"></span>
 							</div>
 						</div>
 						<div class="exchange-form-block-text">
 							<span class="exchange-form-block-text__item">Pay the application before the end of rhis
 								time</span>
-							<span class="exchange-form-block-text__item_active">23:16</span>
+							<span class="exchange-form-block-text__item_active" id="timer">00:00</span>
 						</div>
 						<button class="exchange-form__button-next" id="exchange-button">i paid</button>
 						<button class="exchange-form__button-next exchange-form__button-next_cancel"

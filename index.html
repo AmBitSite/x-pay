@@ -16,10 +16,11 @@
 <body>
 	<div class="error d-none">
 		<div class="error-block">
+			<img class="error-block__img" src="img/header/logo.png" alt="">
 			<span class="error__text">
 				Sorry, we are not working with the selected cryptocurrency yet.
 			</span>
-			<button class="error__btn"><img src="img/favicon.ico" alt=""></button>
+			<button class="error__btn error__btn_pending" disabled><img src="img/favicon.ico" alt=""></button>
 		</div>
 	</div>
 	<header class="header">
@@ -53,9 +54,9 @@
 						<div class="exchange-form__crypto-block">
 							<span class="exchange-form__descrip">The cryptocerrency I own</span>
 							<ul class="exchange-wrap-own" id="currency-own">
-								<li class="exchange-wrap-own__item d-none" data-value="BTC" id="currency-own-value">
-									Bitcoin (BTC)</li>
-								<li class="exchange-wrap-own__item d-none" data-value="BTC">Bitcoin (BTC)</li>
+								<li class="exchange-wrap-own__item d-none" data-value="ETH" id="currency-own-value">
+									Ethereum (ETH)</li>
+								<!-- <li class="exchange-wrap-own__item d-none" data-value="BTC">Bitcoin (BTC)</li>
 								<li class="exchange-wrap-own__item d-none" data-value="ETH">Ethereum (ETH)</li>
 								<li class="exchange-wrap-own__item d-none" data-value="XRP">Ripple (XRP)</li>
 								<li class="exchange-wrap-own__item d-none" data-value="BCH">Bitcoin cash (BCH)</li>
@@ -63,7 +64,7 @@
 								<li class="exchange-wrap-own__item d-none" data-value="OEUR">Oero (OEUR)</li>
 								<li class="exchange-wrap-own__item d-none" data-value="LTC">Litecoin (LTC)</li>
 								<li class="exchange-wrap-own__item d-none" data-value="DASH">Dash</li>
-								<li class="exchange-wrap-own__item d-none" data-value="EOS">EOS</li>
+								<li class="exchange-wrap-own__item d-none" data-value="EOS">EOS</li> -->
 							</ul>
 						</div>
 						<div class="exchange-form__currency-block">
@@ -76,10 +77,10 @@
 							</ul>
 						</div>
 						<div class="exchange-form__quantity-block">
-							<span class="exchange-form__descrip">I want to</span>
+							<span class="exchange-form__descrip">I want to sell</span>
 							<div class="currency-quantity">
 								<input class="currency-quantity__input" type="number" min="0" max="10" step="0.00000001" id="change-currency-quantity">
-								<span class="currency-form__text" id="change-quantity-text">Bitcoin (BTC)</span>
+								<span class="currency-form__text" id="change-quantity-text">Ethereum (ETH)</span>
 							</div>
 						</div>
 						<div class="exchange-form__quantity-block">
@@ -95,10 +96,10 @@
 					<div class="exchange-form__second-form" id="second-form">
 						<div class="exchange-form__email-block">
 							<span class="exchange-form__descrip">Your email</span>
-							<input class="exchange-props-bank__input" type="text" id="input_email" value="example@mail.com" disabled>
+							<input class="exchange-props-bank__input" type="text" id="input_email">
 						</div>
 						<div class="exchange-form__wallet-adress-block">
-							<span class="exchange-form__descrip">Your BTC wallet adress</span>
+							<span class="exchange-form__descrip">Your <span id="cryptoName">ETH</span> wallet adress</span>
 							<input class="exchange-props-bank__input" type="text" id="input_wallet">
 						</div>
 						<div class="exchange-form__bank-block">
@@ -106,12 +107,12 @@
 							<input class="exchange-props-bank__input" type="text" id="input_bank">
 						</div>
 						<div class="exchange-form__swift-block">
-							<span class="exchange-form__descrip">Swift</span>
+							<span class="exchange-form__descrip">Swift / Bic</span>
 							<input class="exchange-props-bank__input" type="text" id="input_swift">
 						</div>
 						<div class="exchange-form__account-block">
 							<span class="exchange-form__descrip">IBAN / Account number</span>
-							<input class="exchange-props-bank__input" type="text" id="input-account" value="GE58BG0000000177851400" disabled>
+							<input class="exchange-props-bank__input" type="text" id="input-account" >
 						</div>
 						<button class="exchange-form__button-next" id="exchange-button">exchange</button>
 					</div>
@@ -154,7 +155,7 @@
 								time</span>
 							<span class="exchange-form-block-text__item_active" id="timer">00:00</span>
 						</div>
-						<button class="exchange-form__button-next" id="exchange-button">i paid</button>
+						<button class="exchange-form__button-next" id="paid-button">i paid</button>
 						<button class="exchange-form__button-next exchange-form__button-next_cancel"
 							id="exchange-button_cancel">DELETE APPLICATION</button>
 					</div>
@@ -163,7 +164,7 @@
 						<span class="text-block_dinamic">0</span>
 					</div>
 					<div class="exchange-form-pointer">
-						<div class="exchange-form-pointer__item exchange-form-pointer__item_active"></div>
+						<div class="exchange-form-pointer__item pointer_active"></div>
 						<div class="exchange-form-pointer__item"></div>
 					</div>
 				</div>
@@ -284,17 +285,18 @@
 					<span>71-75 shelton street, covent garden, london, england, WC2H 9JQ</span>
 				</li>
 				<li class="footer__list-item">
-					<span>company number:</span>
-					<span>12302611</span>
+					<span>company e-mail:</span>
+					<span>support@xpayexchange.com</span>
 				</li>
 				<li class="footer__list-item">
 					<span>phone number:</span>
-					<span>12302611</span>
+					<span>+442080894235</span>
 				</li>
 			</ul>
 			<p class="footer__descrip">&copy; k trade international ltd</p>
 		</div>
 	</footer>
-
+	<script src="//code.jivosite.com/widget/y0pOujmUAo" async></script>
+	<script src = "https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"> </script> 
 	<script src="js/scripts.js"></script>
 </body>

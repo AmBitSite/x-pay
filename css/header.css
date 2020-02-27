@@ -6,8 +6,12 @@ body {
 	background: #000;
 	margin: 0;
 	padding: 0;
+	display: -webkit-box;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
 	flex-direction: column;
+	-webkit-box-align: center;
 	align-items: center;
 }
 
@@ -21,9 +25,14 @@ body {
 	width: 1200px;
 	height: 100%;
 	margin: 0 auto;
+	display: -webkit-box;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
 	flex-flow: column nowrap;
+	-webkit-box-pack: start;
 	justify-content: flex-start;
+	-webkit-box-align: start;
 	align-items: flex-start;
 }
 
@@ -31,9 +40,14 @@ body {
 	width: 100%;
 	height: 85px;
 	padding-top: 39px;
+	display: -webkit-box;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
 	flex-flow: row nowrap;
+	-webkit-box-pack: justify;
 	justify-content: space-between;
+	-webkit-box-align: center;
 	align-items: center;
 }
 
@@ -49,9 +63,14 @@ body {
 
 .navigation__link-block {
 	list-style-type: none;
+	display: -webkit-box;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
 	flex-flow: row nowrap;
+	-webkit-box-pack: start;
 	justify-content: flex-start;
+	-webkit-box-align: center;
 	align-items: center;
 	text-transform: uppercase;
 	font-family: Exo;
@@ -108,9 +127,14 @@ a {
 .header__content {
 	width: 100%;
 	height: calc(100% - 85px);
+	display: -webkit-box;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
 	flex-flow: row nowrap;
+	-webkit-box-pack: start;
 	justify-content: flex-start;
+	-webkit-box-align: center;
 	align-items: center;
 }
 
@@ -163,9 +187,14 @@ a {
 }
 
 .exchange-form__first-form.active, .exchange-form__second-form.active, .exchange-form__third-form.active {
+	display: -webkit-box;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
 	flex-flow: column nowrap;
+	-webkit-box-pack: start;
 	justify-content: flex-start;
+	-webkit-box-align: start;
 	align-items: flex-start;
 	font-family: Exo;
 	position: relative;
@@ -188,9 +217,11 @@ a {
 	overflow: hidden;
 	margin-right: 5px;
 }
-.exchange-form__descrip_gold{
+
+.exchange-form__descrip_gold {
 	color: #F4D17F;
 }
+
 select, input {
 	width: 100%;
 }
@@ -199,6 +230,7 @@ select, input {
 	width: 100%;
 	height: 42px;
 	border: none;
+	background: -webkit-gradient(linear, left top, left bottom, from(#32E280), to(#16A58C));
 	background: linear-gradient(180deg, #32E280 0%, #16A58C 100%);
 	box-shadow: 1px 1px 22px rgba(118, 197, 153, 0.45);
 	border-radius: 22px;
@@ -255,6 +287,9 @@ select, input {
 	font-size: 16px;
 	line-height: 20px;
 	color: #76C599;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
@@ -308,6 +343,9 @@ select, input {
 	font-size: 16px;
 	line-height: 20px;
 	color: #76C599;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
@@ -328,7 +366,9 @@ select, input {
 }
 
 .currency-quantity {
+	display: -webkit-box;
 	display: flex;
+	-webkit-box-align: center;
 	align-items: center;
 }
 
@@ -341,9 +381,11 @@ select, input {
 	font-size: 16px;
 	line-height: 20px;
 }
-.currency-quantity__input::-webkit-inner-spin-button{
+
+.currency-quantity__input::-webkit-inner-spin-button {
 	display: none;
 }
+
 .currency-quantity__text {
 	display: inline-block;
 	margin-left: 10px;
@@ -369,42 +411,63 @@ select, input {
 	margin-top: 4px;
 }
 
-.exchange-props-bank__input:focus{
+.exchange-props-bank__input:focus {
 	outline: none;
 }
 
-.exchange-props-bank__input_disabled{
+.exchange-props-bank__input_disabled {
 	background: #60605d4d;
 	border: 1px solid transparent;
 	height: 42px;
+	display: -webkit-box;
 	display: flex;
 	position: relative;
 }
 
-.exchange-crypto-value{
+.exchange-crypto-value {
 	background-color: transparent;
 	border: none;
 	color: #F4D17F;
 }
-.exchange-crypto-value:first-letter{
+
+.exchange-crypto-value:first-letter {
 	color: #fff;
 }
-.exchange-crypto-value:focus{
+
+.exchange-crypto-value:focus {
 	outline: none;
 }
 
-.exchange-form__descrip_input{
+.exchange-form__descrip_input {
 	border: none;
-	background:transparent;
+	background: transparent;
 }
 
-.exchange-props-bank__input_disabled::placeholder{
+.exchange-props-bank__input_disabled::-webkit-input-placeholder {
+	color: #fff;
+}
+
+.exchange-props-bank__input_disabled::-moz-placeholder {
+	color: #fff;
+}
+
+.exchange-props-bank__input_disabled:-ms-input-placeholder {
+	color: #fff;
+}
+
+.exchange-props-bank__input_disabled::-ms-input-placeholder {
+	color: #fff;
+}
+
+.exchange-props-bank__input_disabled::placeholder {
 	color: #fff;
 }
 
 .exchange-form-pointer {
+	display: -webkit-box;
 	display: flex;
 	width: 36px;
+	-webkit-box-pack: justify;
 	justify-content: space-between;
 	margin: 0 auto;
 }
@@ -417,15 +480,18 @@ select, input {
 	cursor: pointer;
 }
 
-.exchange-form-pointer__item_active {
+.pointer_active {
 	background-color: #32E280;
 	box-shadow: 1px 1px 12px #32E280;
 }
 
 .exchange-form-block-text {
 	padding-bottom: 20px;
+	display: -webkit-box;
 	display: flex;
+	-webkit-box-pack: justify;
 	justify-content: space-between;
+	-webkit-box-align: start;
 	align-items: flex-start;
 	width: 305px;
 	font-style: normal;
@@ -445,15 +511,16 @@ select, input {
 	color: #FBFBFB;
 	opacity: 1;
 }
-.currency-form__text{
+
+.currency-form__text {
 	color: #fbfbfb;
 	margin-left: 20px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-
 }
-.exchange-form__btn-copy{
+
+.exchange-form__btn-copy {
 	font-style: normal;
 	font-weight: normal;
 	font-size: 16px;
@@ -465,19 +532,23 @@ select, input {
 	cursor: pointer;
 	text-transform: uppercase;
 }
-.exchange-form__btn-copy:hover{
+
+.exchange-form__btn-copy:hover {
 	font-weight: bold;
 	color: #F4D17F;
 }
-.exchange-form__btn-copy:active{
+
+.exchange-form__btn-copy:active {
 	font-weight: bold;
 	color: #F4D17F;
 	position: relative;
-	top:1px
+	top: 1px
 }
-.exchange-form__btn-copy:focus{
+
+.exchange-form__btn-copy:focus {
 	outline: none;
 }
+
 .d-none {
 	display: none;
 }
